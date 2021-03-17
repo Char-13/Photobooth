@@ -1,9 +1,12 @@
 package PhotoBoothProgram;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -28,8 +31,6 @@ public class GUIPhotoBooth extends JFrame implements ActionListener {
     private JMenuItem stopVideo;
 
     private ListPhoto newPhoto;
-
-
 
 
 
@@ -99,15 +100,29 @@ public class GUIPhotoBooth extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e){
 
         Object comp = e.getSource();
+       // BufferedImage image = null;
+        int width = 800;
+        int height = 800;
+
 
         if (e.getSource() == EditorMode){
             newPhoto.setDisplay(2);
 
         }
 
-        if (e.getSource() == SavedGallery){
-            newPhoto.setDisplay(3);
-
+        if (e.getSource() == SavedGallery) {
+            JFileChooser chooser = new JFileChooser();
+            int status = chooser.showSaveDialog(null);
+            if (status == JFileChooser.APPROVE_OPTION) {
+                JFrame picture = new JFrame();
+                String filename = chooser.getSelectedFile().getAbsolutePath();
+                ImageIcon image = new ImageIcon(filename);
+                JLabel label = new JLabel(image);
+                picture.add(label);
+                picture.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                picture.pack();
+                picture.setVisible(true);
+            }
         }
 
         if (e.getSource() == takeVideo){
