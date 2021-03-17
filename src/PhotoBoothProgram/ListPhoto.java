@@ -40,5 +40,19 @@ public class ListPhoto {
              this.display = x;
              updateScreen();
          }
-     }
+
+    public int getDisplay() {return display;}
+
+    public void saveDatabase(String filename) throws IOException {
+//        try {
+////            FileOutputStream fos = new FileOutputStream(filename);
+////            ObjectOutputStream os = new ObjectOutputStream(fos);
+////            os.writeObject(ListPhoto);
+////            os.close();
+////        } catch (IOException ex) {
+////            JOptionPane.showMessageDialog(null, "Error in saving db");
+////            throw ex;
+//        }
+    }
+}
 
