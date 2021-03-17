@@ -27,6 +27,7 @@ public class GUIPhotoBooth extends JFrame implements ActionListener {
     private JMenuItem takeVideo;
     private JMenuItem stopVideo;
 
+    private ListPhoto newPhoto;
 
 
 
@@ -99,38 +100,42 @@ public class GUIPhotoBooth extends JFrame implements ActionListener {
 
         Object comp = e.getSource();
 
-        if (EditorMode == e.getSource()){
-           // PList.setDisplay(2);
+        if (e.getSource() == EditorMode){
+            newPhoto.setDisplay(2);
 
         }
 
-        if (SavedGallery == e.getSource()){
-            //PList.setDisplay(3);
+        if (e.getSource() == SavedGallery){
+            newPhoto.setDisplay(3);
 
         }
 
-        if (takeVideo == e.getSource()){
+        if (e.getSource() == takeVideo){
 
         }
 
-        if (takePhoto == e.getSource()){
+        if (e.getSource() == takePhoto){
 
         }
 
-        if (openPhoto == e.getSource()){
+        if (e.getSource() == openPhoto){
 
         }
 
-        if (savePhoto == e.getSource()){
+        if (e.getSource() == savePhoto){
 
         }
 
-        if (stopVideo == e.getSource()){
+        if (e.getSource() == takeVideo){
 
         }
 
-        if (takeVideo == e.getSource()){
+        if (e.getSource() == takeVideo){
 
+        }
+
+        if (e.getSource() == exitItem){
+            System.exit(0);
         }
 
     }
