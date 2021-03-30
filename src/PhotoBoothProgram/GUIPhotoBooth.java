@@ -1,5 +1,7 @@
 package PhotoBoothProgram;
 
+
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +36,7 @@ public class GUIPhotoBooth extends JFrame implements ActionListener {
 
 
 
-//    private ListPhoto PList;
+    //    private ListPhoto PList;
     private JPanel panel;
 
     private JTable jListArea;
@@ -82,18 +84,18 @@ public class GUIPhotoBooth extends JFrame implements ActionListener {
         setJMenuBar(menus);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
-//        PList = new ListPhoto();
-//       jListArea = new JTable(PList);
-        scrollList = new JScrollPane();
-        JScrollPane scrollList = new JScrollPane(jListArea);
-        scrollList.setPreferredSize(new Dimension(800, 300));
-        panel.add(scrollList);
+        //PList = new ListPhoto();
+        //jListArea = new JTable(PList);
+        //scrollList = new JScrollPane();
+        // JScrollPane scrollList = new JScrollPane(jListArea);
+        // scrollList.setPreferredSize(new Dimension(800, 300));
+        //panel.add(scrollList);
 
         add(panel, BorderLayout.CENTER);
 
-        setVisible(true);
-        setSize(1024, 768);
-       // jListArea.setAutoCreateRowSorter(true);
+        //setVisible(true);
+        //setSize(1024, 768);
+        // jListArea.setAutoCreateRowSorter(true);
     }
 
 
@@ -111,16 +113,15 @@ public class GUIPhotoBooth extends JFrame implements ActionListener {
             JFileChooser chooser = new JFileChooser();
             int status = chooser.showSaveDialog(null);
             if (status == JFileChooser.APPROVE_OPTION) {
-                JFrame picture = new JFrame();
                 String filename = chooser.getSelectedFile().getAbsolutePath();
                 ImageIcon image = new ImageIcon(filename);
-                JLabel label = new JLabel(image);
-                picture.add(label);
-                picture.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                picture.pack();
-                picture.setVisible(true);
-                picture.setSize(800,800);
-                newPhoto.setDisplay(2);
+                Image scaledImage = image.getImage();
+                Image newImg = scaledImage.getScaledInstance(400,400, Image.SCALE_SMOOTH);
+                ImageIcon lastImage = new ImageIcon(newImg);
+               JLabel label = new JLabel(lastImage);
+               newPhoto.setDisplay(2);
+                //new editorScreen(lastImage);
+                panel.add(label);
             }
         }
 
@@ -154,5 +155,10 @@ public class GUIPhotoBooth extends JFrame implements ActionListener {
 
 
 
-    public static void main(String[] args){new GUIPhotoBooth();}
+    public static void main(String[] args){
+        GUIPhotoBooth gui = new GUIPhotoBooth();
+        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gui.setVisible(true);
+        gui.setSize(1024, 768);
+    }
 }
