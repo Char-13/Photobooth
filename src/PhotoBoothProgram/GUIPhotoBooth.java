@@ -71,12 +71,8 @@ public class GUIPhotoBooth extends JFrame implements ActionListener{
 
         if (e.getSource() == SavedGallery) {
             JFileChooser chooser = new JFileChooser();
-
-            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
- //               File file = chooser.getSelectedFile();
-//                 String name = file.getAbsolutePath();
-//                 ImageIcon icon = new ImageIcon(name);
-//                 Image pic = icon.getImage();
+            int status = chooser.showOpenDialog(null);
+            if (status == JFileChooser.APPROVE_OPTION) {
                 String filename = chooser.getSelectedFile().getAbsolutePath();
                 ImageIcon image = new ImageIcon(filename);
                 Image scaledImage = image.getImage();
@@ -86,18 +82,9 @@ public class GUIPhotoBooth extends JFrame implements ActionListener{
                 newPhoto.setDisplay(2);
                 //new editorScreen(lastImage);
                 panel.add(label);
-//            int status = chooser.showSaveDialog(null);
-//            if (status == JFileChooser.APPROVE_OPTION) {
-//                String filename = chooser.getSelectedFile().getAbsolutePath();
-//                ImageIcon image = new ImageIcon(filename);
-//                Image scaledImage = image.getImage();
-//                Image newImg = scaledImage.getScaledInstance(400,400, Image.SCALE_SMOOTH);
-//                ImageIcon lastImage = new ImageIcon(newImg);
-//               JLabel label = new JLabel(lastImage);
-//               newPhoto.setDisplay(2);
-//                panel.add(label);
-//            }
             }
+        }
+
 
             if (e.getSource() == takePhoto && newPhoto.getDisplay() == 1) {
 
