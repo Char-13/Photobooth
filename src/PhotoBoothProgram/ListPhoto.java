@@ -13,20 +13,21 @@ public class ListPhoto {
 
     private int display = 1;
 
+    private static final int colCameraScreen = 1;
     private static final int colEditScreen = 2;
-
-    private static final int colPhotoScreen = 1;
-
     private static final int colGalleryScreen = 3;
 
+//    public Object editorScreen() {
+//        return new editorScreen();
+//    }
 
     public void updateScreen() {
         switch (display) {
-            case colPhotoScreen:
+            case colCameraScreen:
                 break;
 
             case colEditScreen:
-                editorScreen();
+               // editorScreen();
                 break;
 
             case colGalleryScreen:
@@ -43,11 +44,5 @@ public class ListPhoto {
     public int getDisplay() {
         return display;
     }
-
-    public Object editorScreen() {
-        return new editorScreen();
-
-    }
-
 }
 

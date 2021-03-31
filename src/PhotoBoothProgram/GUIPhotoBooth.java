@@ -1,138 +1,100 @@
 package PhotoBoothProgram;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
 
-
-public class GUIPhotoBooth extends JFrame implements ActionListener {
-
+public class GUIPhotoBooth extends JFrame implements ActionListener{
     // JMenu bar that creates the possible menus in the program.
     private JMenuBar menus;
 
     //Two menus at the top right of the program that allows the user to interact with the program.
     private JMenu fileMenu;
-    private JMenu actionMenu;
 
     // All the menu options available to the user when they run the program.
-    private JMenuItem openPhoto;
     private JMenuItem savePhoto;
     private JMenuItem EditorMode;
     private JMenuItem SavedGallery;
     private JMenuItem exitItem;
-    private JMenuItem takePhoto;
-    private JMenuItem takeVideo;
-    private JMenuItem stopVideo;
+    private JButton takePhoto;
 
     private ListPhoto newPhoto = new ListPhoto();
-
-
-
-//    private ListPhoto PList;
     private JPanel panel;
-
-    private JTable jListArea;
-
-    private JScrollPane scrollList;
+    private JLabel image;
 
 
     public GUIPhotoBooth(){
         menus = new JMenuBar();
         fileMenu = new JMenu("File");
-        actionMenu = new JMenu("Action");
+
         exitItem = new JMenuItem("Exit");
-        openPhoto = new JMenuItem("Open Photo");
         savePhoto = new JMenuItem("Save Photo");
         EditorMode = new JMenuItem("Editor Mode");
-        SavedGallery= new JMenuItem("Saved Gallery");
-        takePhoto = new JMenuItem("Take Photo");
-        takeVideo = new JMenuItem("Take Video");
-        stopVideo = new JMenuItem("Stop Video");
+        SavedGallery= new JMenuItem("Open");
 
+        takePhoto = new JButton("Take Photo");
+
+        panel = new JPanel();
 
         fileMenu.add(EditorMode);
         fileMenu.add(SavedGallery);
         fileMenu.add(exitItem);
-        actionMenu.add(takePhoto);
-        actionMenu.add(openPhoto);
-        actionMenu.add(savePhoto);
-        actionMenu.add(takeVideo);
-        actionMenu.add(stopVideo);
 
         menus.add(fileMenu);
-        menus.add(actionMenu);
+
+        panel.add(takePhoto);
 
         fileMenu.addActionListener(this);
-        actionMenu.addActionListener(this);
-        takePhoto.addActionListener(this);
-        openPhoto.addActionListener(this);
         savePhoto.addActionListener(this);
-        takeVideo.addActionListener(this);
-        stopVideo.addActionListener(this);
         exitItem.addActionListener(this);
         EditorMode.addActionListener(this);
         SavedGallery.addActionListener(this);
 
+        takePhoto.addActionListener(this);
+
         setJMenuBar(menus);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panel = new JPanel();
-//        PList = new ListPhoto();
-//       jListArea = new JTable(PList);
-        scrollList = new JScrollPane();
-        JScrollPane scrollList = new JScrollPane(jListArea);
-        scrollList.setPreferredSize(new Dimension(800, 300));
-        panel.add(scrollList);
 
         add(panel, BorderLayout.CENTER);
-
-        setVisible(true);
-        setSize(1024, 768);
-       // jListArea.setAutoCreateRowSorter(true);
     }
 
-
     public void actionPerformed(ActionEvent e){
+//        Object comp = e.getSource();
 
-        Object comp = e.getSource();
-
-        if (e.getSource() == EditorMode){
-            newPhoto.setDisplay(2);
-            newPhoto.updateScreen();
-
+        if (e.getSource() == EditorMode) {
+//            newPhoto.setDisplay(2);
+//            newPhoto.updateScreen();
         }
 
         if (e.getSource() == SavedGallery) {
             JFileChooser chooser = new JFileChooser();
-            int status = chooser.showSaveDialog(null);
-            if (status == JFileChooser.APPROVE_OPTION) {
-                JFrame picture = new JFrame();
-                String filename = chooser.getSelectedFile().getAbsolutePath();
-                ImageIcon image = new ImageIcon(filename);
-                JLabel label = new JLabel(image);
-                picture.add(label);
-                picture.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                picture.pack();
-                picture.setVisible(true);
-                picture.setSize(800,800);
-                newPhoto.setDisplay(2);
+            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                File file = chooser.getSelectedFile();
+
+                String name = file.getAbsolutePath();
+                ImageIcon icon = new ImageIcon(name);
+                Image pic = icon.getImage();
+
+                if(icon.getIconHeight() > 1000 || icon.getIconWidth() > 1000) {
+                    Image newPic = pic.getScaledInstance(975, 975, Image.SCALE_SMOOTH);
+                    ImageIcon scaledIcon = new ImageIcon(newPic);
+                    image = new JLabel("", scaledIcon, JLabel.CENTER);
+                    panel.add(image, BorderLayout.CENTER);
+                    panel.revalidate();
+                    panel.repaint();
+                }
+                else{
+                    image = new JLabel("", icon, JLabel.CENTER);
+                    panel.add(image, BorderLayout.CENTER);
+                    panel.revalidate();
+                    panel.repaint();
+                }
             }
         }
 
-        if (e.getSource() == takeVideo && newPhoto.getDisplay() == 1){
-
-        }
-
         if (e.getSource() == takePhoto  && newPhoto.getDisplay() == 1){
-
-        }
-
-        if (e.getSource() == openPhoto  && newPhoto.getDisplay() == 1){
 
         }
 
@@ -140,19 +102,16 @@ public class GUIPhotoBooth extends JFrame implements ActionListener {
 
         }
 
-        if (e.getSource() == takeVideo  && newPhoto.getDisplay() == 1){
-
-        }
-
         if (e.getSource() == exitItem){
             System.exit(0);
         }
-
     }
 
+    public static void main(String[] args) {
+        GUIPhotoBooth GUI = new GUIPhotoBooth();
+        GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        GUI.setVisible(true);
+        GUI.setSize(1000, 1000);
+    }
 
-
-
-
-    public static void main(String[] args){new GUIPhotoBooth();}
 }
