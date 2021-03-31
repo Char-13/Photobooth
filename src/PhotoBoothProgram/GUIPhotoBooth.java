@@ -21,6 +21,7 @@ public class GUIPhotoBooth extends JFrame implements ActionListener{
     private JButton takePhoto;
 
     private ListPhoto newPhoto = new ListPhoto();
+
     private JPanel panel;
     private JLabel image;
 
@@ -60,7 +61,7 @@ public class GUIPhotoBooth extends JFrame implements ActionListener{
         add(panel, BorderLayout.CENTER);
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
 //        Object comp = e.getSource();
 
         if (e.getSource() == EditorMode) {
@@ -70,6 +71,7 @@ public class GUIPhotoBooth extends JFrame implements ActionListener{
 
         if (e.getSource() == SavedGallery) {
             JFileChooser chooser = new JFileChooser();
+
             if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = chooser.getSelectedFile();
 
@@ -77,33 +79,43 @@ public class GUIPhotoBooth extends JFrame implements ActionListener{
                 ImageIcon icon = new ImageIcon(name);
                 Image pic = icon.getImage();
 
-                if(icon.getIconHeight() > 1000 || icon.getIconWidth() > 1000) {
+                if (icon.getIconHeight() > 1000 || icon.getIconWidth() > 1000) {
                     Image newPic = pic.getScaledInstance(975, 975, Image.SCALE_SMOOTH);
                     ImageIcon scaledIcon = new ImageIcon(newPic);
                     image = new JLabel("", scaledIcon, JLabel.CENTER);
                     panel.add(image, BorderLayout.CENTER);
                     panel.revalidate();
                     panel.repaint();
-                }
-                else{
+                } else {
                     image = new JLabel("", icon, JLabel.CENTER);
                     panel.add(image, BorderLayout.CENTER);
                     panel.revalidate();
                     panel.repaint();
                 }
+//            int status = chooser.showSaveDialog(null);
+//            if (status == JFileChooser.APPROVE_OPTION) {
+//                String filename = chooser.getSelectedFile().getAbsolutePath();
+//                ImageIcon image = new ImageIcon(filename);
+//                Image scaledImage = image.getImage();
+//                Image newImg = scaledImage.getScaledInstance(400,400, Image.SCALE_SMOOTH);
+//                ImageIcon lastImage = new ImageIcon(newImg);
+//               JLabel label = new JLabel(lastImage);
+//               newPhoto.setDisplay(2);
+//                panel.add(label);
+//            }
             }
-        }
 
-        if (e.getSource() == takePhoto  && newPhoto.getDisplay() == 1){
+            if (e.getSource() == takePhoto && newPhoto.getDisplay() == 1) {
 
-        }
+            }
 
-        if (e.getSource() == savePhoto  && newPhoto.getDisplay() == 1){
+            if (e.getSource() == savePhoto && newPhoto.getDisplay() == 1) {
 
-        }
+            }
 
-        if (e.getSource() == exitItem){
-            System.exit(0);
+            if (e.getSource() == exitItem) {
+                System.exit(0);
+            }
         }
     }
 
