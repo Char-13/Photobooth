@@ -73,25 +73,19 @@ public class GUIPhotoBooth extends JFrame implements ActionListener{
             JFileChooser chooser = new JFileChooser();
 
             if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                File file = chooser.getSelectedFile();
-
-                String name = file.getAbsolutePath();
-                ImageIcon icon = new ImageIcon(name);
-                Image pic = icon.getImage();
-
-                if (icon.getIconHeight() > 1000 || icon.getIconWidth() > 1000) {
-                    Image newPic = pic.getScaledInstance(975, 975, Image.SCALE_SMOOTH);
-                    ImageIcon scaledIcon = new ImageIcon(newPic);
-                    image = new JLabel("", scaledIcon, JLabel.CENTER);
-                    panel.add(image, BorderLayout.CENTER);
-                    panel.revalidate();
-                    panel.repaint();
-                } else {
-                    image = new JLabel("", icon, JLabel.CENTER);
-                    panel.add(image, BorderLayout.CENTER);
-                    panel.revalidate();
-                    panel.repaint();
-                }
+ //               File file = chooser.getSelectedFile();
+//                 String name = file.getAbsolutePath();
+//                 ImageIcon icon = new ImageIcon(name);
+//                 Image pic = icon.getImage();
+                String filename = chooser.getSelectedFile().getAbsolutePath();
+                ImageIcon image = new ImageIcon(filename);
+                Image scaledImage = image.getImage();
+                Image newImg = scaledImage.getScaledInstance(400,400, Image.SCALE_SMOOTH);
+                ImageIcon lastImage = new ImageIcon(newImg);
+                JLabel label = new JLabel(lastImage);
+                newPhoto.setDisplay(2);
+                //new editorScreen(lastImage);
+                panel.add(label);
 //            int status = chooser.showSaveDialog(null);
 //            if (status == JFileChooser.APPROVE_OPTION) {
 //                String filename = chooser.getSelectedFile().getAbsolutePath();
