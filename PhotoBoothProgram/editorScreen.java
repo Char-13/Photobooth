@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
-public class GUIEditor extends JFrame implements ActionListener{
+public class editorScreen extends JFrame implements ActionListener{
 
     // JMenu bar that creates the possible menus in the program.
     private JMenuBar menus;
@@ -21,18 +21,22 @@ public class GUIEditor extends JFrame implements ActionListener{
     private JMenuItem openPhoto;
     private JMenuItem exitItem;
 
-    //    private ListPhoto PList;
     private JPanel panel;
 
     //Editor Buttons
+    private JRadioButton blackNWhite;
+    private JScrollBar saturation;
+    private JScrollBar bloom;
 
-
-    public GUIEditor() {
+    public editorScreen() {
         menus = new JMenuBar();
         fileMenu = new JMenu("File");
         exitItem = new JMenuItem("Exit");
         openPhoto = new JMenuItem("Open Photo");
+        blackNWhite = new JRadioButton("Black/White");
 
+        saturation = new JScrollBar(Adjustable.HORIZONTAL);
+        bloom = new JScrollBar(Adjustable.HORIZONTAL);
         fileMenu.add(openPhoto);
         fileMenu.add(exitItem);
 
@@ -73,11 +77,11 @@ public class GUIEditor extends JFrame implements ActionListener{
         }
     }
 
-    public static void main(String[] args){
-        GUIEditor gui = new GUIEditor();
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setVisible(true);
-        gui.setSize(1024, 768);
-    }
+        public static void main(String[] args){
+            GUIPhotoBooth gui = new GUIPhotoBooth();
+            gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            gui.setVisible(true);
+            gui.setSize(1024, 768);
+        }
 
 }
