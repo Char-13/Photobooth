@@ -7,8 +7,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
 
-
 public class GUIPhotoBooth extends JFrame implements ActionListener {
+
+    Syste.load("/usr/local/Cellar/opencv/4.5.1_3/share/java/opencv4/libopencv_java451.dylib");
 
     // JMenu bar that creates the possible menus in the program.
     private JMenuBar menus;
